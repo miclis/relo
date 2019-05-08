@@ -10,10 +10,11 @@ export const highlightSelected = id => {
 	resultsArr.forEach(el => {
 		el.classList.remove('results__link--active');
 	});
-	const check = document.querySelector(`.results__link[href*="${id}"]`);
+	const check = document.querySelector(`.results__link[href*="#?offerId=${id}"]`);
+
 	if (check)
 		document
-			.querySelector(`.results__link[href*="${id}"]`)
+			.querySelector(`.results__link[href*="#?offerId=${id}"]`)
 			.classList.add('results__link--active');
 };
 
@@ -44,20 +45,10 @@ export const formatPrice = (number, addSign = true) => {
 	return st + ' ' + (addSign ? sign : '');
 };
 
-const getOfficeId = () => {
-	const hash = window.location.hash;
-	let newHash = hash;
-
-	if (hash.length > 18) {
-		newHash = hash.slice(0, 18);
-	}
-	return newHash;
-}
-
 const renderOffer = offer => {
 	const markup = `
     <li>
-        <a class="results__link results__link--offer" href="${getOfficeId()}&offerId=${offer.id}">
+        <a class="results__link results__link--offer" href="#?offerId=${offer.id}">
             <figure class="results__fig">
                 <img
                     src="${offer.imageUrl}"
