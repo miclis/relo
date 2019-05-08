@@ -1,0 +1,75 @@
+{
+    "count": 10,
+    "offers": [
+        {
+            "name": "Super house",
+            "id": "00001",
+            "owner": "John Doe",
+            "ownersPrice": 450000,
+            "imageUrl": "https://pmcvariety.files.wordpress.com/2018/07/bradybunchhouse_sc11.jpg?w=1000&h=563&crop=1"
+        },
+        {
+            "name": "Duper house",
+            "id": "00002",
+            "owner": "John Doe",
+            "ownersPrice": 450000,
+            "imageUrl": "https://pmcvariety.files.wordpress.com/2018/07/bradybunchhouse_sc11.jpg?w=1000&h=563&crop=1"
+        },
+        {
+            "name": "Duper house",
+            "id": "00003",
+            "owner": "John Doe",
+            "ownersPrice": 450000,
+            "imageUrl": "https://pmcvariety.files.wordpress.com/2018/07/bradybunchhouse_sc11.jpg?w=1000&h=563&crop=1"
+        },
+        {
+            "name": "Duper house",
+            "id": "00004",
+            "owner": "John Doe",
+            "ownersPrice": 450000,
+            "imageUrl": "https://pmcvariety.files.wordpress.com/2018/07/bradybunchhouse_sc11.jpg?w=1000&h=563&crop=1"
+        },
+        {
+            "name": "Duper house",
+            "id": "00005",
+            "owner": "John Doe",
+            "ownersPrice": 450000,
+            "imageUrl": "https://pmcvariety.files.wordpress.com/2018/07/bradybunchhouse_sc11.jpg?w=1000&h=563&crop=1"
+        },
+        {
+            "name": "Duper house",
+            "id": "00006",
+            "owner": "John Doe",
+            "ownersPrice": 450000,
+            "imageUrl": "https://pmcvariety.files.wordpress.com/2018/07/bradybunchhouse_sc11.jpg?w=1000&h=563&crop=1"
+        },
+        {
+            "name": "Duper house",
+            "id": "00007",
+            "owner": "John Doe",
+            "ownersPrice": 450000,
+            "imageUrl": "https://pmcvariety.files.wordpress.com/2018/07/bradybunchhouse_sc11.jpg?w=1000&h=563&crop=1"
+        },
+        {
+            "name": "Duper house",
+            "id": "00008",
+            "owner": "John Doe",
+            "ownersPrice": 450000,
+            "imageUrl": "https://pmcvariety.files.wordpress.com/2018/07/bradybunchhouse_sc11.jpg?w=1000&h=563&crop=1"
+        },
+        {
+            "name": "Duper house",
+            "id": "00009",
+            "owner": "John Doe",
+            "ownersPrice": 450000,
+            "imageUrl": "https://pmcvariety.files.wordpress.com/2018/07/bradybunchhouse_sc11.jpg?w=1000&h=563&crop=1"
+        },
+        {
+            "name": "Duper house",
+            "id": "00010",
+            "owner": "John Doe",
+            "ownersPrice": 450000,
+            "imageUrl": "https://pmcvariety.files.wordpress.com/2018/07/bradybunchhouse_sc11.jpg?w=1000&h=563&crop=1"
+        }
+    ]
+}
