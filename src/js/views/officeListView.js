@@ -36,7 +36,7 @@ export const limitOfficeName = (name, limit = 24) => {
 const renderOffice = office => {
 	const markup = `
 		<li>
-			<a class="results__link results__link--office" href="#${office.id}">
+			<a class="results__link results__link--office" href="#?officeId=${office.id}">
 				<div class="results__data">
 					<h4 class="results__name">${limitOfficeName(office.name)}</h4>
 					<p class="results__city">${office.city}</p>

@@ -44,10 +44,20 @@ export const formatPrice = (number, addSign = true) => {
 	return st + ' ' + (addSign ? sign : '');
 };
 
+const getOfficeId = () => {
+	const hash = window.location.hash;
+	let newHash = hash;
+
+	if (hash.length > 18) {
+		newHash = hash.slice(0, 18);
+	}
+	return newHash;
+}
+
 const renderOffer = offer => {
 	const markup = `
     <li>
-        <a class="results__link results__link--offer" href="#$${offer.id}">
+        <a class="results__link results__link--offer" href="${getOfficeId()}&offerId=${offer.id}">
             <figure class="results__fig">
                 <img
                     src="${offer.imageUrl}"

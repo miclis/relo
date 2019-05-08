@@ -13,7 +13,9 @@ import { elements, renderLoader, clearLoader } from './views/base';
  * - OfferList object
  * - Offer object (includes Reviews)
  */
-const state = {};
+const state = {
+	offerListLoaded: false
+};
 
 /**
  * OFFICELIST CONTROLLER
@@ -62,7 +64,7 @@ elements.officesResPages.addEventListener('click', e => {
  */
 const controlOfferList = async () => {
 	// Get Office Id from URL
-	const id = window.location.hash.replace('#', '');
+	const id = window.location.hash.replace('#?officeId=', '').slice(0, 7);
 
 	// 1. New OfferList object and add to state
 	state.offerList = new OfferList();
@@ -134,12 +136,19 @@ const controlOffer = async () => {
 
 ['hashchange', 'load'].forEach(event =>
 	window.addEventListener(event, function() {
-		var regexOffices = /#[^\$]/;
-		var regexOffers = /#\$/;
+		var regexOffices = /officeId=/;
+		var regexOffers = /offerId=/;
+		const hash = window.location.hash;
 
-		if (window.location.hash.match(regexOffices)) {
+		if (hash.match(regexOffices) && !hash.match(regexOffers)) {
 			controlOfferList();
+			state.offerListLoaded = true;
+			console.log('done');
 		} else if (window.location.hash.match(regexOffers)) {
+			if (!state.offerListLoaded) {
+				console.log('reload');
+				controlOfferList();
+			}
 			controlOffer();
 		}
 	})
