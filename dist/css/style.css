@@ -139,7 +139,7 @@ body {
 	transform: translateY(6px);
 }
 .btn-tiny svg {
-	fill: rgb(204, 9, 9);
+	fill: rgb(0, 109, 233);
 	transition: all 0.3s;
 }
 .btn-tiny:focus {
@@ -299,7 +299,7 @@ body {
 }
 .results__price {
 	font-size: 1.2rem;
-	color: rgb(184, 0, 0);
+	color: rgb(255, 123, 0);
 	font-weight: 900;
 	margin-top: 0.3rem;
 }
