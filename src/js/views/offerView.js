@@ -41,7 +41,7 @@ const createReview = review => `
                     >
                     <button class="review__accept ${
 						review.accepted ? 'reviev__accept--accepted' : ''
-					} btn-tiny" data-revid=${review.id}>
+					} btn-tiny btn-tiny--review" data-revid=${review.id}>
                         <svg class="offer__info-icon">
                             <use href="img/ext-icons.svg#icon-checked"></use>
                         </svg>
@@ -62,6 +62,16 @@ export const renderOffer = offer => {
             <h1 class="offer__name">
                 <span>${offer.name}</span>
             </h1>
+            <button class="btn-tiny btn-tiny--edit btn--fig" title="Edit offer">
+                <svg class="offer__info-icon">
+                    <use href="img/ext-icons.svg#icon-settings"></use>
+                </svg>
+            </button>
+            <button class="btn-tiny btn-tiny--edit btn--fig--delete" title="Delete offer">
+                <svg class="offer__info-icon">
+                    <use href="img/ext-icons.svg#icon-remove"></use>
+                </svg>
+            </button>
         </figure>
         <div class="offer__container">
             <div class="offer__info">
@@ -135,19 +145,4 @@ const calcOurPrice = offer => {
 		finalPrice = Math.round(sum / acceptedCount);
 	}
 	return finalPrice;
-};
-
-export const adjustOurPrice = offer => {
-	Array.from(elements.offer.children).forEach(el => {
-		if (el.classList.contains('offer__container')) {
-			Array.from(el.children).forEach(sel => {
-				Array.from(sel.children).forEach(ssel => {
-					if (ssel.classList.contains('offer__info-data--price-ours')) {
-                        const newPrice = calcOurPrice(offer);
-						ssel.textContent = typeof(newPrice) == 'number' ? formatPrice(newPrice, false) : 'N/A';
-					}
-				});
-			});
-		}
-	});
 };

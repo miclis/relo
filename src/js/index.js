@@ -23,7 +23,7 @@ const controlOfferList = async () => {
 	state.offerList = new OfferList();
 
 	// 2. Prepare UI for Offers results
-	offerView.clearOffer();
+	offerListView.clearOffers();
 	renderLoader(elements.offersRes);
 
 	try {
@@ -99,29 +99,37 @@ const controlOffer = async () => {
 	})
 );
 
-const acceptReview = async id => {
-	// id from event
+const deleteOffer = async () => {
+	// Id from state
+	const id = state.offer.id;
 	try {
-		// 1. Send accepted request to API, wait for response
-		await state.offer.acceptReview(id);
+		// 1. Send delete request to API, wait for response
+		await state.offer.deleteOffer(id);
 
-		if (!state.offer.acceptReviewStatus)
-			throw new Error(`Server responded with: ${state.offer.acceptReviewStatus}`);
+		if (!state.offer.deleteStatus)
+			throw new Error(`Server responded with: ${state.offer.deleteStatus}`);
 
-		// 2. Accept state value
-		state.offer.result.reviews.forEach(review => {
-			if (review.id == id) review.accepted = true;
-		});
+		// 2. Delete offer from state
+		state.offer = null;
 
-		// 3. Render changes on UI (change icon to green, adjust our price)
-		offerView.acceptReview(id);
-		offerView.adjustOurPrice(state.offer.result);
+		// 3. Render changes on UI (clear offer box, reload offer list)
+		offerView.clearOffer();
+		controlOfferList();
 	} catch (error) {
-		alert('Could not update review status on the server...');
+		alert('Could not delete offer from the server...');
 		console.log(error);
 	}
 };
 
+elements.offer.addEventListener('click', e => {
+	const btn = e.target.closest('.btn--fig--delete');
+
+	if (btn) {
+		deleteOffer();
+	}
+});
+
+/*
 elements.offer.addEventListener('click', e => {
 	const btn = e.target.closest('.btn-tiny');
 
@@ -132,3 +140,4 @@ elements.offer.addEventListener('click', e => {
 		}
 	}
 });
+*/

@@ -32,7 +32,7 @@ body {
 
 .container {
 	max-width: 120rem;
-	min-height: 120rem;
+	min-height: 130rem;
 	margin: 4vw auto;
 	background-color: #fff;
 	border-radius: 6px;
@@ -146,16 +146,33 @@ body {
 .btn-tiny:focus {
 	outline: none;
 }
-.btn-tiny:hover svg {
-	fill: rgb(6, 255, 40);
-	transform: translateY(-1px);
+.btn-tiny--add:hover {
+	fill: rgb(0, 0, 0);
+	transform: translateY(-2px);
 }
-.btn-tiny:active svg {
+.btn-tiny--edit:hover svg {
+	fill: rgb(196, 196, 196);
+	transform: translateY(-2px);
+}
+.btn-tiny--edit:active svg {
+	fill: rgb(204, 9, 9);
+	transform: translateY(0);
+}
+.btn-tiny--review:hover svg {
+	fill: rgb(6, 255, 40);
+	transform: translateY(-2px);
+}
+.btn-tiny--review:active svg {
 	fill: rgb(204, 9, 9);
 	transform: translateY(0);
 }
 .btn-tiny:not(:last-child) {
 	margin-right: 0.3rem;
+}
+.btn-tiny--add {
+	position: inherit;
+	right: 18.6%;
+	top:13%;
 }
 
 .heading-2 {
@@ -339,6 +356,18 @@ body {
 	position: relative;
 	transform: scale(1.04) translateY(-1px);
 	transform-origin: top;
+}
+.offer__fig .btn--fig {
+	position: absolute;
+	top: 12%;
+	left: 89%;
+	transform: scale(1.5);
+}
+.offer__fig .btn--fig--delete {
+	position: absolute;
+	bottom: 12%;
+	left: 88.8%;
+	transform: scale(1.2);
 }
 .offer__fig::before {
 	content: '';

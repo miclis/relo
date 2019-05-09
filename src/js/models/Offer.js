@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { proxy, token, apiURL, offerURL, acceptReviewURL } from '../config';
+import { proxy, token, apiURL, offerURL, deleteOfferURL } from '../config';
 
 export default class Offer {
 	constructor(id) {
@@ -28,15 +28,14 @@ export default class Offer {
 		}
 	}
 
-	async acceptReview(id) {
-		this.acceptReviewStatus = false;
+	async deleteOffer(id) {
+		this.deleteStatus = false;
 		try {
-			const res = await axios.post(`${apiURL}/${acceptReviewURL}`, 
+			const res = await axios.post(`${apiURL}/${deleteOfferURL}`,
 			{
-				"id": id,
-				"accepted": true
+				"id": id
 			});
-			this.acceptReviewStatus = res.status;
+			this.deleteStatus = res.status;
 		} catch (error) {
 			console.log(error);
 		}
