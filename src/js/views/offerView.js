@@ -129,7 +129,7 @@ export const renderOffer = offer => {
 	elements.offer.insertAdjacentHTML('afterbegin', markup);
 };
 
-const calcOurPrice = offer => {
+export const calcOurPrice = offer => {
 	let finalPrice;
 	let sum = 0;
 	const reviewCount = offer.reviewCount;

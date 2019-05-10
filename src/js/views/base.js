@@ -7,10 +7,7 @@ export const elements = {
     offersRes: document.querySelector('.offers'),
 	offersResList: document.querySelector('.results__list--offers'),
 	offersResPages: document.querySelector('.results__pages--offers'),
-	offer: document.querySelector('.offer'),
-	offerFig: document.querySelector('.offer__fig'),
-	offerContainer: document.querySelector('.offer__container'),
-	reviewsRes: document.querySelector('.review__list')
+	offer: document.querySelector('.offer')
 };
 
 export const elementStrings = {

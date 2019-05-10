@@ -3,6 +3,7 @@ import OfferList from './models/OfferList';
 import * as offerListView from './views/offerListView';
 import Offer from './models/Offer';
 import * as offerView from './views/offerView';
+import * as offeAddEditView from './views/offerAddEditView';
 
 import { elements, renderLoader, clearLoader } from './views/base';
 
@@ -34,8 +35,9 @@ const controlOfferList = async () => {
 		clearLoader();
 		offerListView.renderOffers(state.offerList.result);
 
+		// 5. Highlight selected offer
 		const id = window.location.hash.slice(10, 15);
-		offerListView.highlightSelected(id);
+		if (id) offerListView.highlightSelected(id);
 	} catch (error) {
 		alert('Something went wrong when rendering offers data...');
 		console.log(error);
@@ -60,27 +62,21 @@ window.addEventListener('load', () => {
 /**
  * OFFER CONTROLLER
  */
-const controlOffer = async () => {
-	// 1. Get Id from URL
-	const id = window.location.hash.replace('#$', '');
-
+const controlOffer = async id => {
 	if (id) {
-		// 2. Prepare UI for changes
+		// 1. Prepare UI for changes
 		offerView.clearOffer();
 		renderLoader(elements.offer);
 
-		// 3. Highlight selected offer item
-		if (state.offerList) offerListView.highlightSelected(id);
-
-		// 4. Create new offer object
+		// 2. Create new offer object
 		state.offer = new Offer(id);
 
 		try {
-			// 5. Get Offer data
+			// 3. Get Offer data
 			await state.offer.getDefaultOffer();
 			// await state.offer.getOffer(id);
 
-			// 6. Render Offer
+			// 4. Render Offer
 			clearLoader();
 			offerView.renderOffer(state.offer.result);
 		} catch (error) {
@@ -94,8 +90,8 @@ const controlOffer = async () => {
 	window.addEventListener(event, function() {
 		const id = window.location.hash.slice(10, 15);
 
-		controlOffer();
-		offerListView.highlightSelected(id);
+		controlOffer(id);
+		if (id) offerListView.highlightSelected(id);
 	})
 );
 
@@ -129,15 +125,51 @@ elements.offer.addEventListener('click', e => {
 	}
 });
 
-/*
-elements.offer.addEventListener('click', e => {
-	const btn = e.target.closest('.btn-tiny');
+const handleFileSelect = event => {
+	var files = event.target.files; // FileList object
+
+	// Get file
+	const f = files[0];
+
+	try {
+		// Only process image files.
+		if (!f.type.match('image.*')) {
+			throw new Error('Selected file was not an image...');
+		}
+
+		var reader = new FileReader();
+
+		// Closure to capture the file information.
+		reader.onload = (function(theFile) {
+			return function(e) {
+				let innerHtml = elements.offer.innerHTML;
+
+				// Selection indication
+				innerHtml = innerHtml.replace(`<label for="file">Upload image</label>`,
+				`<label for="file">${theFile.name}</label>`);
+
+				// Render new image
+				innerHtml = innerHtml.replace(`<figure class="offer__fig"></figure>`,
+				`<figure class="offer__fig">
+					<img src="${e.target.result}" alt="${escape(theFile.name)}" class="offer__img" />
+				</figure>`);
+				elements.offer.innerHTML = innerHtml;
+			};
+		})(f);
+
+		// Read in the image file as a data URL.
+		reader.readAsDataURL(f);
+	} catch (error) {
+		alert('Incorrect file type!');
+		console.log(error);
+	}
+};
+
+elements.offer.addEventListener('change', e => {
+	const btn = e.target.closest('.inputfile');
 
 	if (btn) {
-		if (!btn.classList.contains('reviev__accept--accepted') ? true : false) {
-			const reviewId = btn.dataset.revid;
-			acceptReview(reviewId);
-		}
+		handleFileSelect(e);
 	}
-});
-*/
+}, false);
+// document.getElementById('files').addEventListener('change', handleFileSelect, false);
