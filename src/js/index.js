@@ -13,7 +13,8 @@ import { elements, renderLoader, clearLoader } from './views/base';
  * - Offer object (includes Reviews)
  */
 const state = {
-	offerListLoaded: false
+	offerListLoaded: false,
+	isEdit: false
 };
 
 /**
@@ -102,7 +103,7 @@ const deleteOffer = async () => {
 		// 1. Send delete request to API, wait for response
 		await state.offer.deleteOffer(id);
 
-		if (!state.offer.deleteStatus)
+		if (state.offer.deleteStatus != 200)
 			throw new Error(`Server responded with: ${state.offer.deleteStatus}`);
 
 		// 2. Delete offer from state
@@ -120,12 +121,26 @@ const deleteOffer = async () => {
 	}
 };
 
+const editOffer = () => {
+	// 1. Clear placeholder
+	offerView.clearOffer();
+
+	// 2. Render addEdit view
+	offerAddEditView.renderAddEditOffer(state.offer.result);
+};
+
 elements.offer.addEventListener('click', e => {
 	const btn = e.target.closest('.btn--fig--delete');
 
 	if (btn) {
 		deleteOffer();
 	}
+});
+
+elements.offer.addEventListener('click', e => {
+	const btn = e.target.closest('.btn--fig--edit');
+
+	if (btn) editOffer();
 });
 
 const handleFileSelect = async event => {
@@ -207,8 +222,7 @@ elements.addButton.addEventListener('click', e => {
 	addOffer();
 });
 
-const submitOffer = async () => {
-	// 1. Get data
+const getInputData = () => {
 	state.offer.imageUrl = elements.offer.getElementsByClassName(
 		offerAddEditView.inputFields.imageUrl
 	)[0].value;
@@ -230,6 +244,11 @@ const submitOffer = async () => {
 	state.offer.ownersPrice = elements.offer.getElementsByClassName(
 		offerAddEditView.inputFields.ownersPrice
 	)[0].value;
+};
+
+const submitOffer = async () => {
+	// 1. Get data
+	getInputData();
 
 	// 2. Submit offer to server
 	try {
@@ -248,7 +267,7 @@ const submitOffer = async () => {
 		// 3. Send submit request to API, wait for response
 		await state.offer.submitOffer();
 
-		if (!state.offer.submitStatus)
+		if (state.offer.submitStatus != 200)
 			throw new Error(`Server responded with: ${state.offer.deleteStatus}`);
 
 		// 4. Render changes on UI (clear addEdit view & render offer)
@@ -263,10 +282,46 @@ const submitOffer = async () => {
 	}
 };
 
+const submitEditOffer = async () => {
+	// 1. Get updated data
+	getInputData();
+
+	// 2. Submit edited offer to server
+	try {
+		if (
+			!state.offer.name ||
+			!state.offer.owner ||
+			!state.offer.street ||
+			!state.offer.postalCode ||
+			!state.offer.city ||
+			!state.offer.ownersPrice
+		) {
+			alert('Add missing fields');
+			throw new Error('Add missing fields.');
+		}
+		// 3. Submit editoffer request to API, wait for response
+		await state.offer.submitEditOffer();
+
+		if (state.offer.editStatus != 200)
+			throw new Error(`Server responded with: ${state.offer.editStatus}`);
+
+		// 4. Render changes on UI (clear addEdit view & render offer)
+		offerView.clearOffer();
+		offerView.renderOffer(state.offer);
+	} catch (error) {
+		alert('Could not submit edited offer to the server...');
+		console.log(error);
+	}
+};
+
 elements.offer.addEventListener('click', event => {
 	const btn = event.target.closest('.btn--submit');
 
 	if (btn) {
-		submitOffer();
+		if (state.isEdit) {
+			submitEditOffer();
+		} else {
+			submitOffer();
+		}
 	}
 });

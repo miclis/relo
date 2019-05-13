@@ -37,7 +37,7 @@ const createReview = review => `
                     >
                     <span
                         class="offer__info-data offer__info-data--price offer__info-data--price-ours"
-                        >${formatPrice(review.ourPrice)}</span
+                        >${formatPrice(review.ourPrice, false)}</span
                     >
                     <button class="review__accept ${
 						review.accepted ? 'reviev__accept--accepted' : ''
@@ -62,7 +62,7 @@ export const renderOffer = offer => {
             <h1 class="offer__name">
                 <span>${offer.name}</span>
             </h1>
-            <button class="btn-tiny btn-tiny--edit btn--fig" title="Edit offer">
+            <button class="btn-tiny btn-tiny--edit btn--fig--edit" title="Edit offer">
                 <svg class="offer__info-icon">
                     <use href="img/ext-icons.svg#icon-settings"></use>
                 </svg>

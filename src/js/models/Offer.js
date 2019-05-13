@@ -29,7 +29,7 @@ export default class Offer {
 	}
 
 	async deleteOffer(id) {
-		this.deleteStatus = false;
+		this.deleteStatus = null;
 		try {
 			const res = await axios.post(`${apiURL}/${deleteOfferURL}`,
 			{
@@ -42,12 +42,22 @@ export default class Offer {
 	}
 
 	async submitOffer() {
-		this.submitStatus = false;
+		this.submitStatus = null;
 		try {
 			// Has to respond with ID of newly created offer!
 			const res = await axios.post(`${apiURL}/${submitOfferURL}`, this);
 			this.submitStatus = res.status;
 			this.id = res.data.id;
+		} catch (error) {
+			console.log(error);
+		}
+	}
+
+	async submitEditOffer() {
+		this.editStatus = null;
+		try {
+			const res = await axios.post(`${apiURL}/${editOfferURL}`, this);
+			this.editStatus = res.status;
 		} catch (error) {
 			console.log(error);
 		}
