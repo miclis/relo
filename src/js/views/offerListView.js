@@ -41,6 +41,12 @@ export const formatPrice = (number, addSign = true) => {
 	if (st.length > 3) {
 		st = st.substr(0, st.length - 3) + "'" + st.substr(st.length - 3, st.length);
 	}
+	if (st.length > 7) {
+		st = st.substr(0, st.length - 7) + "'" + st.substr(st.length - 7, st.length);
+	}
+	if (st.length > 11) {
+		st = st.substr(0, st.length - 11) + "'" + st.substr(st.length - 11, st.length);
+	}
 
 	return st + ' ' + (addSign ? sign : '');
 };

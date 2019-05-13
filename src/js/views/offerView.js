@@ -58,7 +58,7 @@ const createReview = review => `
 export const renderOffer = offer => {
 	const markup = `
         <figure class="offer__fig">
-            <img src="${offer.imageUrl}" alt="${offer.name}" class="offer__img" />
+            ${offer.imageUrl != null ? '<img src="' + offer.imageUrl + '" alt="' + offer.name + '" class="offer__img" />' : ''}
             <h1 class="offer__name">
                 <span>${offer.name}</span>
             </h1>
@@ -122,7 +122,7 @@ export const renderOffer = offer => {
         <div class="reviews">
 			<h2 class="heading-2 heading-left">REVIEWS</h2>
             <ul class="review__list">
-                ${offer.reviews.map(review => createReview(review)).join('')}
+                ${offer.reviews != null ? offer.reviews.map(review => createReview(review)).join('') : '<p class="review__description">No reviews available...</p>'}
             </ul>
         </div>
     `;
@@ -135,7 +135,7 @@ export const calcOurPrice = offer => {
 	const reviewCount = offer.reviewCount;
 	let acceptedCount = 0;
 
-	if (reviewCount != 0) {
+	if (reviewCount != 0 && reviewCount != null) {
 		offer.reviews.forEach(review => {
 			if (review.accepted) {
 				sum += review.ourPrice;

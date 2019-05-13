@@ -1,11 +1,20 @@
 import { elements } from './base';
-import { formatPrice } from './offerListView';
+
+export const inputFields = {
+    imageUrl: 'input__field--imageUrl',
+    name: 'input__field--name',
+    owner: 'input__field--owner',
+    street: 'input__field--street',
+    postalCode: 'input__field--postalCode',
+    city: 'input__field--city',
+    ownersPrice: 'input__field--ownersPrice'
+}
 
 export const renderAddEditOffer = offer => {
 	const markup = `
         <figure class="offer__fig"></figure>
         <div class="offer__container offer__container--add-edit">
-            <div class="offer__info--file">
+            <div class="offer__info--file disabled">
                 <form action="">
                     <input type="file" name="file" id="file" class="inputfile" />
                     <label for="file">Upload image</label>
@@ -13,10 +22,18 @@ export const renderAddEditOffer = offer => {
             </div>
             <div class="offer__info">
                 <svg class="offer__info-icon">
+                    <use href="img/ext-icons.svg#icon-google-play"></use>
+                </svg>
+                <form class="input">
+                    <input type="text" class="input__field input__field--imageUrl" placeholder="Image URL" />
+                </form>
+            </div>
+            <div class="offer__info">
+                <svg class="offer__info-icon">
                     <use href="img/ext-icons.svg#icon-palace"></use>
                 </svg>
                 <form class="input">
-                    <input type="text" class="input__field" placeholder="Property Name" />
+                    <input type="text" class="input__field input__field--name" placeholder="Property Name" />
                 </form>
             </div>
             <div class="offer__info">
@@ -26,7 +43,7 @@ export const renderAddEditOffer = offer => {
                 <form class="input">
                     <input
                         type="text"
-                        class="input__field"
+                        class="input__field input__field--owner"
                         placeholder="Owner's Name & Last Name"
                     />
                 </form>
@@ -38,7 +55,7 @@ export const renderAddEditOffer = offer => {
                 <form class="input">
                     <input
                         type="text"
-                        class="input__field"
+                        class="input__field input__field--street"
                         placeholder="Address (Street)"
                     />
                 </form>
@@ -47,14 +64,14 @@ export const renderAddEditOffer = offer => {
                 <form class="input">
                     <input
                         type="text"
-                        class="input__field"
+                        class="input__field input__field--postalCode"
                         placeholder="Address (Postal Code)"
                     />
                 </form>
             </div>
             <div class="offer__info offer__info--address-part">
                 <form class="input">
-                    <input type="text" class="input__field" placeholder="Address (City)" />
+                    <input type="text" class="input__field input__field--city" placeholder="Address (City)" />
                 </form>
             </div>
             <div class="offer__info">
@@ -63,7 +80,7 @@ export const renderAddEditOffer = offer => {
                     >$</span
                 >
                 <form class="input">
-                    <input type="text" class="input__field" placeholder="Owner's Price" />
+                    <input type="number" class="input__field input__field--ownersPrice" placeholder="Owner's Price" />
                 </form>
             </div>
             <div class="offer__info">

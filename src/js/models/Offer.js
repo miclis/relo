@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { proxy, token, apiURL, offerURL, deleteOfferURL } from '../config';
+import { proxy, token, apiURL, offerURL, deleteOfferURL, submitOfferURL } from '../config';
 
 export default class Offer {
 	constructor(id) {
@@ -36,6 +36,18 @@ export default class Offer {
 				"id": id
 			});
 			this.deleteStatus = res.status;
+		} catch (error) {
+			console.log(error);
+		}
+	}
+
+	async submitOffer() {
+		this.submitStatus = false;
+		try {
+			// Has to respond with ID of newly created offer!
+			const res = await axios.post(`${apiURL}/${submitOfferURL}`, this);
+			this.submitStatus = res.status;
+			this.id = res.data.id;
 		} catch (error) {
 			console.log(error);
 		}

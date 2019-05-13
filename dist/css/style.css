@@ -529,7 +529,6 @@ body {
 }
 .review__item:hover .review__accept {
 	opacity: 1;
-	visibility: visible;
 }
 
 .review__info {
