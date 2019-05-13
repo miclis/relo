@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { proxy, token, apiURL, offerURL, deleteOfferURL, submitOfferURL } from '../config';
+import { proxy, token, apiURL, offerURL, deleteOfferURL, submitOfferURL, editOfferURL } from '../config';
 
 export default class Offer {
 	constructor(id) {
