@@ -347,6 +347,10 @@ body {
 	float: right;
 }
 
+.offer__column {
+	background-color: #f9f5f3;
+}
+
 .offer,
 .reviews {
 	background-color: #f9f5f3;
@@ -642,4 +646,15 @@ padding-left: 4rem;
 .btn--submit:focus {
 	outline: 1px dotted #000;
 	outline: -webkit-focus-ring-color auto 5px;
+}
+
+.btn--addrev {
+	position: absolute;
+    right: 54%;
+    padding-top: 0.9%;
+}
+
+.input__field--review {
+	background: white;
+	transform: translateX(5rem);
 }

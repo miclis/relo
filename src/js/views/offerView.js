@@ -3,6 +3,10 @@ import { formatPrice } from './offerListView';
 
 export const clearOffer = () => {
     elements.offer.innerHTML = '';
+    clearReviews();
+};
+
+export const clearReviews = () => {
     elements.reviews.innerHTML = '';
 };
 
@@ -124,6 +128,11 @@ export const renderOffer = offer => {
     elements.offer.insertAdjacentHTML('afterbegin', markup);
     const reviewsMarkup = `
         <h2 class="heading-2 heading-left">REVIEWS</h2>
+        <button class="btn-tiny btn-tiny--edit btn--addrev" title="Add review">
+                <svg class="offer__info-icon">
+                    <use href="img/ext-icons.svg#icon-google-play"></use>
+                </svg>
+        </button>
         <ul class="review__list">
             ${offer.reviews != null ? offer.reviews.map(review => createReview(review)).join('') : '<p class="review__description">No reviews available...</p>'}
         </ul>

@@ -325,3 +325,62 @@ elements.offer.addEventListener('click', event => {
 		}
 	}
 });
+
+const getReviewData = () => {
+	return {
+		author: elements.reviews.getElementsByClassName(
+			offerAddEditView.inputFields.reviewAuthor
+		)[0].value,
+		price: elements.reviews.getElementsByClassName(
+			offerAddEditView.inputFields.reviewPrice
+		)[0].value,
+		desc: elements.reviews.getElementsByClassName(
+			offerAddEditView.inputFields.reviewDesc
+		)[0].value
+	};
+}
+
+const addReview = () => {
+	// 1. Clear place for input fields
+	offerView.clearReviews();
+	// 2. Render input fields
+	offerAddEditView.renderAddReview();
+};
+
+elements.reviews.addEventListener('click', event => {
+	const btn = event.target.closest('.btn--addrev');
+	if (btn) {
+		addReview();
+	}
+});
+
+const submitReview = async () => {
+	// 1. Get data from input fields
+	const data = getReviewData();
+	// 2. Submit data to server
+	try {
+		if (data.author == null || data.price == null || data.desc == null) {
+			alert('Add missing fields');
+			throw new Error('Add missing fields.');
+		}
+		// 3. Submit to server
+		await state.offer.submitReview(data);
+
+		if (state.offer.reviewSubmitStatus != 200)
+			throw new Error(`Server responded with: ${state.offer.reviewSubmitStatus}`);
+		
+		// 4. Render changes on UI (clear reviews, rerender offer with new review)
+		offerView.clearOffer();
+		controlOffer(state.offer.id);
+	} catch (error) {
+		alert('Could not submit review to the server...');
+		console.log(error);
+	}
+};
+
+elements.reviews.addEventListener('click', event => {
+	const btn = event.target.closest('.btn--submit');
+	if (btn) {
+		submitReview();
+	}
+});
