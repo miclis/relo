@@ -347,7 +347,8 @@ body {
 	float: right;
 }
 
-.offer {
+.offer,
+.reviews {
 	background-color: #f9f5f3;
 	border-top: 0px solid #fff;
 }

@@ -8,7 +8,8 @@ export const elements = {
 	offersResList: document.querySelector('.results__list--offers'),
 	offersResPages: document.querySelector('.results__pages--offers'),
 	offer: document.querySelector('.offer'),
-	addButton: document.querySelector('.btn-tiny--add')
+	addButton: document.querySelector('.btn-tiny--add'),
+	reviews: document.querySelector('.reviews')
 };
 
 export const elementStrings = {

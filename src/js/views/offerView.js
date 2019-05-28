@@ -2,7 +2,8 @@ import { elements } from './base';
 import { formatPrice } from './offerListView';
 
 export const clearOffer = () => {
-	elements.offer.innerHTML = '';
+    elements.offer.innerHTML = '';
+    elements.reviews.innerHTML = '';
 };
 
 export const acceptReview = id => {
@@ -119,14 +120,15 @@ export const renderOffer = offer => {
                 >
             </div>
         </div>
-        <div class="reviews">
-			<h2 class="heading-2 heading-left">REVIEWS</h2>
-            <ul class="review__list">
-                ${offer.reviews != null ? offer.reviews.map(review => createReview(review)).join('') : '<p class="review__description">No reviews available...</p>'}
-            </ul>
-        </div>
     `;
-	elements.offer.insertAdjacentHTML('afterbegin', markup);
+    elements.offer.insertAdjacentHTML('afterbegin', markup);
+    const reviewsMarkup = `
+        <h2 class="heading-2 heading-left">REVIEWS</h2>
+        <ul class="review__list">
+            ${offer.reviews != null ? offer.reviews.map(review => createReview(review)).join('') : '<p class="review__description">No reviews available...</p>'}
+        </ul>
+    `;
+    elements.reviews.insertAdjacentHTML('afterbegin', reviewsMarkup);
 };
 
 export const calcOurPrice = offer => {
