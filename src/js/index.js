@@ -265,7 +265,7 @@ const submitOffer = async () => {
 			throw new Error('Add missing fields.');
 		}
 		// 3. Send submit request to API, wait for response
-		await state.offer.submitOffer();
+		await state.offer.submitOffer(state.offer.);
 
 		if (state.offer.submitStatus != 200)
 			throw new Error(`Server responded with: ${state.offer.deleteStatus}`);

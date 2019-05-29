@@ -43,11 +43,10 @@ export default class Offer {
 
 	async submitOffer() {
 		this.submitStatus = null;
+		this.officeId = 'pol0001';
 		try {
-			// Has to respond with ID of newly created offer!
 			const res = await axios.post(`${apiURL}/${submitOfferURL}`, this);
 			this.submitStatus = res.status;
-			this.id = res.data.id;
 		} catch (error) {
 			console.log(error);
 		}
