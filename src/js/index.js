@@ -265,7 +265,7 @@ const submitOffer = async () => {
 			throw new Error('Add missing fields.');
 		}
 		// 3. Send submit request to API, wait for response
-		await state.offer.submitOffer(state.offer.);
+		await state.offer.submitOffer();
 
 		if (state.offer.submitStatus != 200)
 			throw new Error(`Server responded with: ${state.offer.deleteStatus}`);
@@ -316,7 +316,6 @@ const submitEditOffer = async () => {
 
 elements.offer.addEventListener('click', event => {
 	const btn = event.target.closest('.btn--submit');
-
 	if (btn) {
 		if (state.isEdit) {
 			submitEditOffer();

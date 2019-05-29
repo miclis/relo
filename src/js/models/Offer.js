@@ -64,6 +64,7 @@ export default class Offer {
 
 	async submitReview(data) {
 		this.reviewSubmitStatus = null;
+		data.offerId = this.result.id;
 		try {
 			const res = await axios.post(`${apiURL}/${submitReviewURL}`, data);
 			this.reviewSubmitStatus = res.status;
