@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { proxy, token, apiURL, offerURL, deleteOfferURL, submitOfferURL, editOfferURL, submitReviewURL} from '../config';
+import { proxy, token, apiURL, offerURL, deleteOfferURL, submitOfferURL, editOfferURL, submitReviewURL, reviewsURL } from '../config';
 
 export default class Offer {
 	constructor(id) {
@@ -8,12 +8,21 @@ export default class Offer {
 
 	async getOffer(id) {
 		try {
-			const res = await axios(`${apiURL}/${token}/${offerURL}/${id}`);
+			const res = await axios(`${apiURL}/${offerURL}?offerId=1`); //to be changed
 			this.result = res.data;
 		} catch (error) {
 			alert('Something went wrong when getting offer info...');
 			console.log(error);
 			throw new Error('Failed to get offer...');
+		}
+		// Reviews
+		try {
+			const reviewRes = await axios(`${apiURL}/${reviewsURL}/all`); // to be changed
+			this.result.reviews = reviewRes.data;
+		} catch (error) {
+			alert('Something went wrong when getting reviews info...');
+			console.log(error);
+			throw new Error('Failed to get reviews...');
 		}
 	}
 
@@ -31,9 +40,10 @@ export default class Offer {
 	async deleteOffer(id) {
 		this.deleteStatus = null;
 		try {
-			const res = await axios.post(`${apiURL}/${deleteOfferURL}`,
-			{
-				"id": id
+			const res = await axios.delete(`${apiURL}/${deleteOfferURL}`, {
+				params: {
+					offerId: 12 // to be changed
+				}
 			});
 			this.deleteStatus = res.status;
 		} catch (error) {
@@ -55,7 +65,8 @@ export default class Offer {
 	async submitEditOffer() {
 		this.editStatus = null;
 		try {
-			const res = await axios.post(`${apiURL}/${editOfferURL}`, this);
+			const res = await axios.put(`${apiURL}/${editOfferURL}`, this);
+			console.log(this);
 			this.editStatus = res.status;
 		} catch (error) {
 			console.log(error);
@@ -65,6 +76,7 @@ export default class Offer {
 	async submitReview(data) {
 		this.reviewSubmitStatus = null;
 		data.offerId = this.result.id;
+		console.log(data);
 		try {
 			const res = await axios.post(`${apiURL}/${submitReviewURL}`, data);
 			this.reviewSubmitStatus = res.status;

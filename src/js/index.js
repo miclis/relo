@@ -30,7 +30,8 @@ const controlOfferList = async () => {
 
 	try {
 		// 3. Get offers
-		await state.offerList.getDefaultResults();
+		//await state.offerList.getDefaultResults();
+		await state.offerList.getResults();
 
 		// 4. Render offers
 		clearLoader();
@@ -74,12 +75,13 @@ const controlOffer = async id => {
 
 		try {
 			// 3. Get Offer data
-			await state.offer.getDefaultOffer();
-			// await state.offer.getOffer(id);
+			//await state.offer.getDefaultOffer();
+			await state.offer.getOffer(id);
 
 			// 4. Render Offer
 			clearLoader();
 			offerView.renderOffer(state.offer.result);
+			
 		} catch (error) {
 			alert('Something went wrong when rendering offer...');
 			console.log(error);
@@ -273,6 +275,8 @@ const submitOffer = async () => {
 		// 4. Render changes on UI (clear addEdit view & render offer)
 		offerView.clearOffer();
 		offerView.renderOffer(state.offer);
+
+		controlOfferList();
 
 		// 5. Set hash
 		window.location.hash = `?offerId=${state.offer.id}`;
