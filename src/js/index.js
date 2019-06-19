@@ -129,6 +129,9 @@ const editOffer = () => {
 
 	// 2. Render addEdit view
 	offerAddEditView.renderAddEditOffer(state.offer.result);
+
+	// 3. Set edit flag
+	state.isEdit = true;
 };
 
 elements.offer.addEventListener('click', e => {
@@ -312,9 +315,12 @@ const submitEditOffer = async () => {
 		// 4. Render changes on UI (clear addEdit view & render offer)
 		offerView.clearOffer();
 		offerView.renderOffer(state.offer);
+		controlOfferList();
 	} catch (error) {
 		alert('Could not submit edited offer to the server...');
 		console.log(error);
+	} finally {
+		state.isEdit = false;
 	}
 };
 

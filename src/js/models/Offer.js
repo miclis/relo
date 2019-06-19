@@ -8,7 +8,7 @@ export default class Offer {
 
 	async getOffer(id) {
 		try {
-			const res = await axios(`${apiURL}/${offerURL}?offerId=1`); //to be changed
+			const res = await axios(`${apiURL}/${offerURL}?offerId=${id}`); //to be changed
 			this.result = res.data;
 		} catch (error) {
 			alert('Something went wrong when getting offer info...');
@@ -17,7 +17,7 @@ export default class Offer {
 		}
 		// Reviews
 		try {
-			const reviewRes = await axios(`${apiURL}/${reviewsURL}/all`); // to be changed
+			const reviewRes = await axios(`${apiURL}/${reviewsURL}?offerId=${id}`); // to be changed
 			this.result.reviews = reviewRes.data;
 		} catch (error) {
 			alert('Something went wrong when getting reviews info...');
@@ -42,7 +42,7 @@ export default class Offer {
 		try {
 			const res = await axios.delete(`${apiURL}/${deleteOfferURL}`, {
 				params: {
-					offerId: 12 // to be changed
+					offerId: id // to be changed
 				}
 			});
 			this.deleteStatus = res.status;
@@ -53,7 +53,7 @@ export default class Offer {
 
 	async submitOffer() {
 		this.submitStatus = null;
-		this.officeId = 'pol0001';
+		this.officeId = '000001';
 		try {
 			const res = await axios.post(`${apiURL}/${submitOfferURL}`, this);
 			this.submitStatus = res.status;
@@ -64,9 +64,11 @@ export default class Offer {
 
 	async submitEditOffer() {
 		this.editStatus = null;
+		this.offerId = this.id;
+		this.officeId = '000001';
+		console.log(this);
 		try {
 			const res = await axios.put(`${apiURL}/${editOfferURL}`, this);
-			console.log(this);
 			this.editStatus = res.status;
 		} catch (error) {
 			console.log(error);
@@ -75,7 +77,9 @@ export default class Offer {
 
 	async submitReview(data) {
 		this.reviewSubmitStatus = null;
-		data.offerId = this.result.id;
+		data.offerId = this.result.offerId;
+		data.accepted = false;
+		console.log(this.result);
 		console.log(data);
 		try {
 			const res = await axios.post(`${apiURL}/${submitReviewURL}`, data);

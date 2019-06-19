@@ -46,7 +46,7 @@ const createReview = review => `
                     >
                     <button class="review__accept ${
 						review.accepted ? 'reviev__accept--accepted' : ''
-					} btn-tiny btn-tiny--review" data-revid=${review.id}>
+					} btn-tiny btn-tiny--review" data-revid=${review.reviewId}>
                         <svg class="offer__info-icon">
                             <use href="img/ext-icons.svg#icon-checked"></use>
                         </svg>
@@ -54,7 +54,7 @@ const createReview = review => `
                 </div>
             </li>
             <li>
-                <p class="review__description">${review.notes}</p>
+                <p class="review__description">${review.desc}</p>
             </li>
         </ul>
     </li>
@@ -89,7 +89,7 @@ export const renderOffer = offer => {
                 <svg class="offer__info-icon">
                     <use href="img/ext-icons.svg#icon-rating"></use>
                 </svg>
-                <span class="offer__info-data offer__info-data--id">${offer.id}</span>
+                <span class="offer__info-data offer__info-data--id">${offer.offerId}</span>
             </div>
             <div class="offer__info">
                 <svg class="offer__info-icon">
@@ -125,6 +125,8 @@ export const renderOffer = offer => {
             </div>
         </div>
     `;
+    if (offer.reviews == null && offer.result.reviews != null) offer.reviews = offer.result.reviews;
+    console.log(offer.reviews);
     elements.offer.insertAdjacentHTML('afterbegin', markup);
     const reviewsMarkup = `
         <h2 class="heading-2 heading-left">REVIEWS</h2>
