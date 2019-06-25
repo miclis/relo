@@ -16,14 +16,10 @@ export default class Offer {
 			throw new Error('Failed to get offer...');
 		}
 		// Reviews
-		try {
+		
 			const reviewRes = await axios(`${apiURL}/${reviewsURL}?offerId=${id}`); // to be changed
 			this.result.reviews = reviewRes.data;
-		} catch (error) {
-			alert('Something went wrong when getting reviews info...');
-			console.log(error);
-			throw new Error('Failed to get reviews...');
-		}
+		
 	}
 
 	async getDefaultOffer() {

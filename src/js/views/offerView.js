@@ -128,6 +128,7 @@ export const renderOffer = offer => {
     if (offer.reviews == null && offer.result.reviews != null) offer.reviews = offer.result.reviews;
     console.log(offer.reviews);
     elements.offer.insertAdjacentHTML('afterbegin', markup);
+    if (offer.reviews != null) {
     const reviewsMarkup = `
         <h2 class="heading-2 heading-left">REVIEWS</h2>
         <button class="btn-tiny btn-tiny--edit btn--addrev" title="Add review">
@@ -140,6 +141,7 @@ export const renderOffer = offer => {
         </ul>
     `;
     elements.reviews.insertAdjacentHTML('afterbegin', reviewsMarkup);
+    }
 };
 
 export const calcOurPrice = offer => {

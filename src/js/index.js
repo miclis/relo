@@ -284,7 +284,7 @@ const submitOffer = async () => {
 		// 5. Set hash
 		window.location.hash = `?offerId=${state.offer.id}`;
 	} catch (error) {
-		alert('Could not submit offer to the server...');
+		
 		console.log(error);
 	}
 };
@@ -340,7 +340,7 @@ const getReviewData = () => {
 		author: elements.reviews.getElementsByClassName(
 			offerAddEditView.inputFields.reviewAuthor
 		)[0].value,
-		price: elements.reviews.getElementsByClassName(
+		ourPrice: elements.reviews.getElementsByClassName(
 			offerAddEditView.inputFields.reviewPrice
 		)[0].value,
 		desc: elements.reviews.getElementsByClassName(
@@ -368,7 +368,7 @@ const submitReview = async () => {
 	const data = getReviewData();
 	// 2. Submit data to server
 	try {
-		if (data.author == null || data.price == null || data.desc == null) {
+		if (data.author == null || data.ourPrice == null || data.desc == null) {
 			alert('Add missing fields');
 			throw new Error('Add missing fields.');
 		}
